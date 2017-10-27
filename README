@@ -1,0 +1,40 @@
+
+
+	Am implementat mai multe functii:
+
+	str2int - transforma un string intr-un numar intreg
+	int2oct - transforma un intreg intr-un numar in baza 8, punandu-l in vector
+	oct2int - exact invers
+	permissions - transform permisiunile in mod octal
+
+	Una dintre bibliotecile folosite este time.h. Cu ajutorul ei pot calcula 
+numarul de secunde ce a trecut de la o anumita data pana in prezent sau pana la 
+o alta data.
+	Este folosita structura tm in care o sa retin 00:00:00 ca ora, minute, secunde 
+luna 0 (0 luni trecute dupa ianuarie), ziua 1 si an 70 (1970, deoarece operatia 
+foloseste ca an de referinta 1900).
+	Pentru a calcula numarul de secunde dintre data pe care o are fisierul si 
+1 ian 1970 00:00:00 folosesc o functie (difftime) care calculeaza numarul de secunde 
+dintre cele 2.
+
+	Citesc fiecare comanda si verific primele 4 caractere pentru a vedea ce 
+am de facut.
+	
+	Parcurg file_ls si folosesc strtok pentru a imparti textul in tokens. 
+Fiecare token are o semnificatie. Primul token reprezinta permisiunile (de ex. 
+-rwx-rwx-r--), al treilea este numele detinatorului, al patrulea este numele grupului 
+care detine fisierul, urmeaza dimensiunea, data si ora etc.
+	Retin toate informatiile in record-ul r.
+	Parcurg usermap.txt pentru a afla uid si gid.
+
+	Parcurg fiecare fisier ce trebuie pus in arhiva si copiez datele din el in 
+arhiva, in blocuri de 512 octeti.
+
+	Pentru listare, parcurg fiecare record din arhiva.
+	Citesc primul record, afisez numele fisierului si trimit pointer-ul cu care 
+parcurg fisierul "offset" octeti mai departe. Offset este dimensiunea fisierului. Deci 
+voi sari peste toate datele din fisier, pentru a ajunge la urmatorul record.
+
+	Get face cam acelasi lucru, doar ca voi cauta record-ul in care r.header.name 
+este numele fisierului pe care trebuie sa il afisez si voi afisa offset (dimensiunea sa) 
+octeti (datele din fiser care se afla in arhiva).
